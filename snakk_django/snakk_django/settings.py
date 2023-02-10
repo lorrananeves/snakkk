@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "djoser",
     "userprofile",
+    "team",
 ]
 
 CORS_ALLOWED_ORIGINS = [

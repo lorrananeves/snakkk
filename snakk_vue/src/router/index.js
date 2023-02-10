@@ -5,6 +5,9 @@ import About from '../views/About.vue'
 import LogIn from '../views/LogIn.vue'
 import SignUp from '../views/SignUp.vue'
 
+import Dashboard from '../views/dashboard/Dashboard.vue'
+import AddTeam from '../views/dashboard/AddTeam.vue'
+
 const routes = [
   {
     path: '/',
@@ -25,7 +28,17 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
-  }
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+  path: '/dashboard/add-team',
+  name: 'AddTeam',
+  component: AddTeam
+}
 ]
 
 const router = createRouter({
