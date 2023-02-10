@@ -1,10 +1,6 @@
 <template>
     <div>
-        <Navbar />
-
         <router-view/>
-
-        <Footer />
     </div>
 </template>
 
@@ -22,9 +18,7 @@ export default {
 <style lang="scss">
 @import '../node_modules/bulma';
 
-.navbar.is-dark {
-    background-color: #222;
-}
+
 
 body {
     background: #333;

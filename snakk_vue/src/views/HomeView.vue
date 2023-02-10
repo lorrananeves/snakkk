@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <Navbar />
+    
     <section class="section landing-page">
       <div class="content">
         <section class="hero is-medium">
@@ -71,17 +73,18 @@
         </section>
       </div>
     </section>
+
+    <Footer />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+    components: {
+        Navbar,
+        Footer
+    }
 }
 </script>
