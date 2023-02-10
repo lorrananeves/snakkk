@@ -14,22 +14,22 @@
                                     <label>Usename</label>
                                     <div class="control">
                                     <input type="text" name="username" class="input" v-model="username">
+                                    </div>
                                 </div>
-                            </div>
 
                                 <div class="field">
                                     <label>Password</label>
                                     <div class="control">
-                                    <input type="password" name="password1" class="input" v-model="password2">
+                                    <input type="password" name="password1" class="input" v-model="password1">
+                                    </div>
                                 </div>
-                            </div>
 
                                 <div class="field">
                                     <label>Repeat password</label>
                                     <div class="control">
                                     <input type="password" name="password2" class="input" v-model="password2">
+                                    </div>
                                 </div>
-                            </div>
 
                             <div 
                                 class="notification is-danger"
@@ -88,6 +88,30 @@ export default {
     methods: {
         submitForm () {
             console.log('submitForm')
+
+            const formData = {
+                username: this.username,
+                password: this.password1
+            }
+
+            this.errors = []
+
+            axios
+                .post('/api/v1/users/', formData)
+                .then(response => {
+                    console.log(response)
+
+                    this.$router.push('/login')
+                })
+                .catch(error => {
+                    if (error.response) {
+                        for (const property in error.response.data) {
+                            this.errors.push(`${property}: ${error.response.data[property]}`)
+                        }
+                    } else {
+                    console.log(JSON.stringify(error))
+                    }
+                }) 
         }
     },
 }

@@ -78,8 +78,62 @@ export default {
         }
     },
     methods: {
-        submitForm () {
+        async submitForm () {
             console.log('submitForm')
+
+            this.errors = []
+
+            axios.defaults.headers.common["Authorization"] = ""
+
+            localStorage.removeItem("token")
+
+            const formData = {
+                username: this.username,
+                password: this.password
+            }
+
+            await axios
+                .post('/api/v1/token/login/', formData)
+                .then(response => {
+                    console.log(response)
+
+                    const token = response.data.auth_token
+
+                    this.$store.commit('setToken', token)
+
+                    axios.defaults.headers.common["Authorization"] = "Token" + token
+
+                    localStorage.setItem("token", token)
+                })
+                .catch(error => {
+                    if (error.response) {
+                        for (const property in error.response.data) {
+                            this.errors.push(`${property}: ${error.response.data[property]}`)
+                        }
+                    } else {
+                    console.log(JSON.stringify(error))
+                    }
+                })
+
+            if (this.$store.state.user.isAuthenticated) {
+                axios
+                    .get('/api/v1/userprofile/get_my_information/')
+                    .then(response => {
+                        console.log(response)
+
+                        this.$store.commit('setUser', {
+                            'user_id': response.data.id,
+                            'user_username': response.data.username,
+                            'user_full_name': response.data.get_full_name
+                        })
+
+                        localStorage.setItem('user_id', response.data.id)
+                        localStorage.setItem('user_username', response.data.username)
+                        localStorage.setItem('user_full_name', response.data.get_full_name)
+
+                        this.$router.push('/dashboard')
+                    })
+            }
         }
     },
 }
