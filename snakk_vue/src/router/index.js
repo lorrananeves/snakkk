@@ -7,6 +7,8 @@ import SignUp from '../views/SignUp.vue'
 
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import AddTeam from '../views/dashboard/AddTeam.vue'
+import Chat from '../views/dashboard/Chat.vue'
+
 
 const routes = [
   {
@@ -38,7 +40,12 @@ const routes = [
   path: '/dashboard/add-team',
   name: 'AddTeam',
   component: AddTeam
-}
+  },
+  {
+  path: '/dashboard/chat:team_id',
+  name: 'Chat',
+  component: Chat
+  }
 ]
 
 const router = createRouter({

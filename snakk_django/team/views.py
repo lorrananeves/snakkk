@@ -20,3 +20,9 @@ def create_team(request):
     team.save()
 
     return Response({'message': 'created'})
+
+@api_view(['GET'])
+def get_team(request, team_id):
+    team = Team.objects.filter(members_is=[request.user.id]).get(pk=team_id)
+    serializer = TeamSerializer(team)
+    return Response(serializer.data)

@@ -10,6 +10,12 @@ export default createStore({
       token: null
     }
   },
+  team: {
+    id: null,
+    name: '',
+    channels: [],
+    members: [],
+  },
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('token')) {
@@ -40,6 +46,18 @@ export default createStore({
       state.user.id = user.user_id
       state.user.username = user.user_username
       state.user.full_name = user.user_full_name
+    },
+    setTeam(state, team) {
+      state. team = {
+        id: null,
+        name: '',
+        channels: [],
+        members: []
+      } 
+
+      state.team.id = team.id
+      state.team.name = team.name
+      state.teammembers = team.members
     }
   },
   actions: {

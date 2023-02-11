@@ -20,7 +20,7 @@
                                 </div>
 
                                 <div class="content">
-                                    <a class="button is-info">Join chat</a>
+                                    <router-link :to="{name: 'Chat', params: { team_id: team.id }}" class="button is-info">Join chat</router-link>
                                 </div>
                             </div>
                         </div>
