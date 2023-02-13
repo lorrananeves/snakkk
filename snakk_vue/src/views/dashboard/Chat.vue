@@ -3,44 +3,9 @@
         <div class="columns">
             <div class="column is-2">
                 <div class="sidebar">
-                    <div class="sidebar_info">
-                        <div class="box">
-                            <h2 class="subtitle"><a>{{ $store.state.team.name }}</a></h2>
+                    <SidebarInfo />
 
-                            <h3 class="user">
-                                <a>
-                                    <template v-if="$store.state.user.full_name">
-                                        {{ $store.state.user.full_name }}
-                                    </template>
-                                    <template v-else>
-                                        {{ $store.state.user.username }}
-                                    </template>
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <aside class="menu">
-                        <p class="menu-label">Channels <span>(add)</span></p>
-
-                        <ul class="menu-list">
-                            <li><a>channel 1</a></li>
-                            <li><a>channel 1</a></li>
-                            <li><a>channel 2</a></li>
-                        </ul>
-
-                        <hr>
-
-                        <p class="menu-label">Direct messages</p>
-
-                        <ul class="menu-list">
-                            <li><a>lolo</a></li>
-                            <li><a>lala</a></li>
-                            <li><a>piu</a></li>
-                        </ul>
-                    </aside>
+                    <SidebarMenu />
                 </div>
             </div>
 
@@ -130,8 +95,16 @@
 <script>
 import axios from 'axios'
 
+import SidebarInfo from '@/components/Chat/SidebarInfo'
+import SidebarMenu from '@/components/Chat/SidebarMenu'
+
+
 export default {
     name: 'Chat',
+    components: {
+        SidebarInfo,
+        SidebarMenu,
+    },
     data() {
         return {
             team_id: null,
@@ -150,7 +123,7 @@ export default {
             .catch(error => {
                 console.log(error)
             })
-    }
+    },
 }
 </script>
 
@@ -168,61 +141,6 @@ export default {
 
     .sidebar .box {
         background: #383838;
-    }
-
-    .sidebar .sidebar__info h2 {
-        margin-bottom: 10px;
-    }
-
-        .sidebar .sidebar__info h2  a {
-            color: #fff;
-        }
-    
-    .sidebar .sidebar__info .user {
-        font-size: 13px;
-    }
-
-        .sidebar .sidebar__info .user a {
-            color: #fff;
-        }
-    
-    .sidebar .menu .menu-label {
-        color: #aaa;
-    }
-
-        .sidebar .menu .menu-label span {
-            cursor: pointer;
-        }
-    
-    .sidebar .menu .menu-label a {
-        color: #aaa;
-
-        &.new-message {
-            font-weight: bold;
-        }
-
-        &.is-active {
-            background-color: #111;
-        }
-
-        &.online {
-            position: relative;
-
-            &:before {
-                width: 5px;
-                height: 5px;
-                position: absolute;
-                top: 16px;
-                left: 3px;
-                content: '';
-                border-radius: 5px;
-                background: #90ee90;
-            }
-        }
-    }
-
-    .sidebar hr {
-        background: #333;
     }
 
 .main-content {

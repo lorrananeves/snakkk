@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/v1/', include('djoser.urls.authtoken')),
     path('api/v1/userprofile/', include('userprofile.urls')),
     path('api/v1/teams/', include('team.urls')),
+    path('api/v1/channels/', include('channel.urls')),
 ]

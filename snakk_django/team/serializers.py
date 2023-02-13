@@ -3,10 +3,12 @@ from rest_framework import serializers
 
 from .models import Team
 
+from channel.serializers import ChannelSerializer
 from userprofile.serializers import UserSerializer
 
 class TeamSerializer(serializers.ModelSerializer):
     members = UserSerializer(many=True)
+    channels = ChannelSerializer(many=True)
 
     class Meta:
         model = Team
@@ -14,5 +16,6 @@ class TeamSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'members',
+            'channels',
             'created_by'
         )

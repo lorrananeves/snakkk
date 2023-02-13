@@ -8,13 +8,14 @@ export default createStore({
       full_name: null,
       isAuthenticated: false,
       token: null
-    }
-  },
-  team: {
-    id: null,
-    name: '',
-    channels: [],
-    members: [],
+    },
+    team: {
+      id: null,
+      name: '',
+      channels: [],
+      members: [],
+    },
+    currentChannel: {}
   },
   mutations: {
     initializeStore(state) {
@@ -58,6 +59,21 @@ export default createStore({
       state.team.id = team.id
       state.team.name = team.name
       state.teammembers = team.members
+      state.team.channels = team.channels
+
+      if (localStorage.getItem('currentChannel')) {
+        state.currentChannel = JSON.parse(localStorage.getItem('currentChannel'))
+      } else {
+        state.currentChannel = state.team.channels[0]
+      }
+    },
+    addChannel(state, channel) {
+      state.team.channels.push(channel)
+    },
+    setCurrentChannel(stat, channel) {
+      state.currentChannel = channel
+
+      localStorage.setItem('currentChannel', JSON.stringify(channel))
     }
   },
   actions: {
