@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/v1/userprofile/', include('userprofile.urls')),
     path('api/v1/teams/', include('team.urls')),
     path('api/v1/channels/', include('channel.urls')),
+    path('api/v1/messages/', include('message.urls'))
 ]

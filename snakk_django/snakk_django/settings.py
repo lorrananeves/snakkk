@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "channel",
     "corsheaders",
     "djoser",
+    "message",
     "userprofile",
     "team",
 ]
