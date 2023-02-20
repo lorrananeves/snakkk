@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from channel.models import Channel
-
 from .models import Team
 from .serializers import TeamSerializer
+
+from channel.models import Channel
 
 @api_view(['GET'])
 def get_teams(request):
@@ -20,10 +20,10 @@ def create_team(request):
 
     Channel.objects.create(name='General', team=team)
 
-    return Response({'message': 'created'})
+    return Response({'messages': 'created'})
 
 @api_view(['GET'])
 def get_team(request, team_id):
-    team = Team.objects.filter(members_is=[request.user.id]).get(pk=team_id)
+    team = Team.objects.filter(members__in=[request.user.id]).get(pk=team_id)
     serializer = TeamSerializer(team)
     return Response(serializer.data)

@@ -13,8 +13,8 @@ class UserprofileSerializer(serializers.ModelSerializer):
         )
 
 class UserSerializer(serializers.ModelSerializer):
-    Userprofile = UserprofileSerializer(read_only=True)
-
+    userprofile = UserprofileSerializer(read_only=True)
+    
     class Meta:
         model = User
         fields = (
