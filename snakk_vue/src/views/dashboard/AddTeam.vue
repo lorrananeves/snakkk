@@ -4,9 +4,9 @@
 
         <section class="section landing-page">
             <div class="container">
-                <div class="collumns is-multiline">
-                    <div class="columns is-4 is-offset-4">
-                        <h1 class="title has-text-white">add team</h1>
+                <div class="columns is-multiline">
+                    <div class="column is-4 is-offset-4">
+                        <h1 class="title has-text-white">Add team</h1>
 
                         <form @submit.prevent="submitForm" class="mb-6">
                             <div class="field">
@@ -45,8 +45,8 @@ import Footer from '@/components/Footer.vue'
 export default {
     name: 'AddTeam',
     components: {
-    Navbar,
-    Footer
+        Navbar, 
+        Footer
     },
     data() {
         return {
@@ -66,7 +66,7 @@ export default {
                 }
 
                 axios
-                    .post("/api/v1/teams/created_team", formData)
+                    .post("/api/v1/teams/create_team/", formData)
                     .then(response => {
                         this.$router.push('/dashboard')
                     })
@@ -74,9 +74,9 @@ export default {
                         console.log(JSON.stringify(error))
                     })
             } else {
-                this.errors.push('The team name ir missing!')
+                this.errors.push('The team name is missing!')
             }
         }
-    },  
+    }
 }
 </script>

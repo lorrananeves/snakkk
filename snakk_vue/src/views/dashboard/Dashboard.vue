@@ -5,7 +5,7 @@
         <section class="section landing-page">
             <div class="container">
                 <div class="columns is-multiline">
-                    <div
+                    <div 
                         class="column is-4"
                         v-for="team in teams"
                         v-bind:key="team.id"
@@ -15,7 +15,7 @@
                                 <div class="media">
                                     <div class="media-content">
                                         <p class="title is-4">{{ team.name }}</p>
-                                        <p class="subtitle is6">{{ team.members.length }}</p>
+                                        <p class="subtitle is-6">{{ team.members.length }} members</p>
                                     </div>
                                 </div>
 
@@ -42,8 +42,8 @@ import Footer from '@/components/Footer.vue'
 export default {
     name: 'Dashboard',
     components: {
-    Navbar,
-    Footer
+        Navbar, 
+        Footer
     },
     data() {
         return {
@@ -66,6 +66,6 @@ export default {
                     console.log(JSON.stringify(error))
                 })
         }
-    },  
+    }
 }
 </script>

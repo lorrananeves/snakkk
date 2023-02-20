@@ -7,41 +7,41 @@
                 <div class="columns">
                     <div class="column is-4 is-offset-4">
                         <div class="box form-box has-text-centered">
-                            <h1>Sign Up</h1>
+                            <h1>Sign up</h1>
 
                             <form @submit.prevent="submitForm" class="mb-6">
                                 <div class="field">
-                                    <label>Usename</label>
+                                    <label>Username</label>
                                     <div class="control">
-                                    <input type="text" name="username" class="input" v-model="username">
+                                        <input type="text" name="username" class="input" v-model="username">
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label>Password</label>
                                     <div class="control">
-                                    <input type="password" name="password1" class="input" v-model="password1">
+                                        <input type="password" name="password1" class="input" v-model="password1">
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label>Repeat password</label>
                                     <div class="control">
-                                    <input type="password" name="password2" class="input" v-model="password2">
+                                        <input type="password" name="password2" class="input" v-model="password2">
                                     </div>
                                 </div>
 
-                            <div 
-                                class="notification is-danger"
-                                v-if="errors.length"
-                            >
-                                <p
-                                    v-for="error in errors"
-                                    v-bind:key="error"
+                                <div 
+                                    class="notification is-danger"
+                                    v-if="errors.length"
                                 >
-                                    {{ error }}
-                                </p>    
-                            </div>
+                                    <p
+                                        v-for="error in errors"
+                                        v-bind:key="error"
+                                    >
+                                        {{ error }}
+                                    </p>
+                                </div>
 
                                 <div class="field">
                                     <div class="control">
@@ -74,8 +74,8 @@ import Footer from '@/components/Footer.vue'
 export default {
     name: 'SignUp',
     components: {
-    Navbar,
-    Footer
+        Navbar, 
+        Footer
     },
     data() {
         return {
@@ -86,7 +86,7 @@ export default {
         }
     },
     methods: {
-        submitForm () {
+        submitForm() {
             console.log('submitForm')
 
             const formData = {
@@ -109,10 +109,10 @@ export default {
                             this.errors.push(`${property}: ${error.response.data[property]}`)
                         }
                     } else {
-                    console.log(JSON.stringify(error))
+                        console.log(JSON.stringify(error))
                     }
-                }) 
+                })
         }
-    },
+    }
 }
 </script>

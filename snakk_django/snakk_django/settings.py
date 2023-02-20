@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    "channels",
     "channel",
     "corsheaders",
     "djoser",
@@ -46,6 +47,12 @@ INSTALLED_APPS = [
     "userprofile",
     "team",
 ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080'
@@ -88,7 +95,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "snakk_django.wsgi.application"
+WSGI_APPLICATION = 'snakk_django.wsgi.application'
+ASGI_APPLICATION = 'snakk_django.asgi.application'
 
 
 # Database

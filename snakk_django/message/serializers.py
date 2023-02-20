@@ -4,7 +4,7 @@ from .models import Message
 
 from userprofile.serializers import UserSerializer
 
-class MessageSerializer(serializers):
+class MessageSerializer(serializers.ModelSerializer):
     to_user = UserSerializer(read_only=True)
     created_by = UserSerializer(read_only=True)
     class Meta:

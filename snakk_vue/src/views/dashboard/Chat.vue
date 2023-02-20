@@ -12,7 +12,11 @@
             <div class="column is-10">
                 <div class="main-content">
                     <div class="messages" id="messages">
-                        <article class="media">
+                        <article 
+                            class="media"
+                            v-for="message in messages"
+                            v-bind:key="message.id"
+                        >
                             <figure class="media-left">
                                 <p class="image is-64x64">
                                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -22,51 +26,11 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong> user name</strong>
+                                        <strong>{{ message.created_by.username }}</strong>
                                         &nbsp;
                                         <small>10 minutes ago</small>
                                         <br>
-                                        Lorem ipsun dolor sit amet
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="media">
-                            <figure class="media-left">
-                                <p class="image is-64x64">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png">
-                                </p>
-                            </figure>
-
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <strong> user name</strong>
-                                        &nbsp;
-                                        <small>10 minutes ago</small>
-                                        <br>
-                                        Lorem ipsun dolor sit amet
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="media">
-                            <figure class="media-left">
-                                <p class="image is-64x64">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png">
-                                </p>
-                            </figure>
-
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <strong> user name</strong>
-                                        &nbsp;
-                                        <small>10 minutes ago</small>
-                                        <br>
-                                        Lorem ipsun dolor sit amet
+                                        {{ message.content }}
                                     </p>
                                 </div>
                             </div>
@@ -98,16 +62,17 @@ import axios from 'axios'
 import SidebarInfo from '@/components/Chat/SidebarInfo'
 import SidebarMenu from '@/components/Chat/SidebarMenu'
 
-
 export default {
     name: 'Chat',
     components: {
         SidebarInfo,
-        SidebarMenu,
+        SidebarMenu
     },
     data() {
         return {
             team_id: null,
+            connection: null,
+            messages: []
         }
     },
     created() {
@@ -124,6 +89,36 @@ export default {
                 console.log(error)
             })
     },
+    mounted() {
+        this.connection = new WebSocket("ws://127.0.0.1:8000/ws/roomname/?token=" + this.$store.state.user.token)
+
+        this.connection.onmessage = (event) => {
+            console.log(event)
+        }
+
+        this.connection.onopen = (event) => {
+            console.log('successfully connected')
+
+            this.getMessages()
+        }
+
+        this.connection.onclose = (event) => {
+            console.log('successfully disconnected')
+        }
+    },
+    methods: {
+        getMessages() {
+            axios
+                .get('/api/v1/messages/get_messages/' + this.$route.params.team_id + '/')
+                .then(response => {
+                    console.log(response.data)
+                    this.messages = response.data
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        }
+    }
 }
 </script>
 
@@ -138,10 +133,6 @@ export default {
     padding: 10px;
     background: #222;
 }
-
-    .sidebar .box {
-        background: #383838;
-    }
 
 .main-content {
     height: 100vh;
@@ -189,5 +180,4 @@ export default {
             border-color: #478778;
             background: #478778;
         }
-
 </style>
